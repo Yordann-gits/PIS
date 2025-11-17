@@ -1,0 +1,40 @@
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Zadacha2 {
+
+    static final int PORT = 80;               // Порт на Web сървър
+    static final int TIMEOUT = 2500;          // Timeout в ms
+    static final String HOST_NAME = "www.kst.tugab.bg";
+
+    public static void main(String[] args) {
+        InetAddress ip;
+
+        // Опит за получаване на IP адрес чрез DNS
+        try {
+            ip = InetAddress.getByName(HOST_NAME);
+        } catch (UnknownHostException ex) {
+            System.out.println("Грешка: Невъзможно е да се намери хоста!");
+            return;
+        }
+
+        Socket socket = new Socket();
+
+        try {
+            // Опит за създаване на TCP връзка към услугата
+            socket.connect(new InetSocketAddress(ip, PORT), TIMEOUT);
+            System.out.println("Порт " + PORT + " е ОТВОРЕН.");
+            System.out.println("Услугата е активна!");
+        } catch (IOException ex) {
+            System.out.println("Порт " + PORT + " е ЗАТВОРЕН.");
+            System.out.println("Услугата НЕ е активна.");
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException ignored) {}
+        }
+    }
+}
