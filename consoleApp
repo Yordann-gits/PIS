@@ -1,0 +1,62 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        int N = 0;
+        boolean status;
+        String warning = "N трябва да е четно число, по-голямо от 0!";
+
+       
+        do {
+            status = false;
+            System.out.print("Въведете броя на елементите в масива N = ");
+
+            try {
+                N = input.nextInt();
+
+                if (N <= 0 || N % 2 != 0) {
+                    System.out.println(warning);
+                    status = true;
+                }
+
+            } catch (InputMismatchException e) {
+                input.next(); 
+                System.out.println(warning);
+                status = true;
+            }
+
+        } while (status);
+
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = (int) (Math.random() * (N + 1));
+        }
+
+        int M = N / 2;
+
+        boolean found = false;
+        System.out.println("\nЕлементи със стойност M = " + M + " се намират на позиции:");
+
+        for (int i = 0; i < N; i++) {
+            if (arr[i] == M) {
+                System.out.println("Индекс: " + i + "  (стойност " + arr[i] + ")");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Няма елемент със стойност M = " + M);
+        }
+
+      
+        System.out.println("\nГнерираният масив:");
+        for (int x : arr) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
+    }
+}
