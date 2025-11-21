@@ -1,0 +1,49 @@
+
+class SoldOutException extends Exception {
+    public SoldOutException(String msg) { super(msg); }
+}
+
+interface Purchasable {
+    boolean purchase(int num) throws SoldOutException;
+}
+
+
+class Exhibition implements Purchasable {
+    protected String title;
+    protected int totalArtworks;
+    protected double ticketPrice;
+
+    public Exhibition(String title, int totalArtworks, double ticketPrice) {
+        this.title = title;
+        this.totalArtworks = totalArtworks;
+        this.ticketPrice = ticketPrice;
+    }
+
+    @Override
+    public boolean purchase(int num) throws SoldOutException {
+        if (totalArtworks >= num) {
+            totalArtworks -= num;
+            return true;
+        }
+        throw new SoldOutException("Свършиха билетите!");
+    }
+}
+
+
+class ModernArt extends Exhibition {
+    private String mainTheme;
+
+    public ModernArt(String title, int totalArtworks, double ticketPrice, String mainTheme) {
+        super(title, totalArtworks, ticketPrice);
+        this.mainTheme = mainTheme;
+    }
+}
+
+class ClassicArt extends Exhibition {
+    private String eraRepresented;
+
+    public ClassicArt(String title, int totalArtworks, double ticketPrice, String eraRepresented) {
+        super(title, totalArtworks, ticketPrice);
+        this.eraRepresented = eraRepresented;
+    }
+}
