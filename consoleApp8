@@ -1,0 +1,56 @@
+
+class NoMoreSeatsException extends Exception {
+    public NoMoreSeatsException(String message) {
+        super(message);
+    }
+}
+
+interface Ticketable {
+    boolean book(int num) throws NoMoreSeatsException;
+}
+
+
+class Performance implements Ticketable {
+    protected String title;
+    protected String director;
+    protected String date;
+    protected int totalSeats;
+    protected double pricePerSeat;
+
+    public Performance(String title, String director, String date, int totalSeats, double pricePerSeat) {
+        this.title = title;
+        this.director = director;
+        this.date = date;
+        this.totalSeats = totalSeats;
+        this.pricePerSeat = pricePerSeat;
+    }
+
+    @Override
+    public boolean book(int num) throws NoMoreSeatsException {
+        if (totalSeats >= num) {
+            totalSeats -= num;
+            return true;
+        }
+        throw new NoMoreSeatsException("Няма свободни места!");
+    }
+}
+
+
+class Drama extends Performance {
+    private String mainActor;
+
+    public Drama(String title, String director, String date, int totalSeats, double pricePerSeat, String mainActor) {
+        super(title, director, date, totalSeats, pricePerSeat);
+        this.mainActor = mainActor;
+    }
+}
+
+
+class Comedy extends Performance {
+    private String leadComedian;
+
+    public Comedy(String title, String director, String date, int totalSeats, double pricePerSeat, String leadComedian) {
+        super(title, director, date, totalSeats, pricePerSeat);
+        this.leadComedian = leadComedian;
+    }
+}
