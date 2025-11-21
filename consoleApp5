@@ -1,0 +1,43 @@
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Zadacha3 {
+
+    static final int START_PORT = 1;
+    static final int END_PORT = 1024;
+    static final int TIMEOUT = 2500;
+
+    static final String HOST_NAME = "www.tugab.bg";
+
+    public static void main(String[] args) {
+
+        InetAddress ip;
+
+        try {
+            ip = InetAddress.getByName(HOST_NAME);
+        } catch (UnknownHostException ex) {
+            System.out.println("Невалидно име на хост!");
+            return;
+        }
+
+        System.out.println("Сканирам портове от " + START_PORT + " до " + END_PORT + "…");
+
+        long start = System.currentTimeMillis();
+
+        for (int port = START_PORT; port <= END_PORT; port++) {
+            try (Socket socket = new Socket()) {
+                socket.connect(new InetSocketAddress(ip, port), TIMEOUT);
+                System.out.println("Отворен порт: " + port);
+            } catch (IOException ex) {
+                
+            }
+        }
+
+        long end = System.currentTimeMillis();
+
+        System.out.println("Време за сканиране: " + (end - start) + " ms");
+    }
+}
