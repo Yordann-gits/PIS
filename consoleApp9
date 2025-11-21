@@ -1,0 +1,43 @@
+
+class Album {
+    protected String albumName;
+    protected String artist;
+    protected int releaseYear;
+    protected int totalTracks;
+    protected double pricePerAlbum;
+
+    public Album(String albumName, String artist, int releaseYear, int totalTracks, double pricePerAlbum) {
+        this.albumName = albumName;
+        this.artist = artist;
+        this.releaseYear = releaseYear;
+        this.totalTracks = totalTracks;
+        this.pricePerAlbum = pricePerAlbum;
+    }
+
+    public boolean buyAlbum(int num) throws OutOfStockException {
+        if (totalTracks >= num) {
+            totalTracks -= num;
+            return true;
+        }
+        throw new OutOfStockException("Няма налични копия от албума!");
+    }
+}
+
+
+class RockAlbum extends Album {
+    private String bandName;
+
+    public RockAlbum(String albumName, String artist, int releaseYear, int totalTracks, double pricePerAlbum, String bandName) {
+        super(albumName, artist, releaseYear, totalTracks, pricePerAlbum);
+        this.bandName = bandName;
+    }
+}
+
+class PopAlbum extends Album {
+    private String producer;
+
+    public PopAlbum(String albumName, String artist, int releaseYear, int totalTracks, double pricePerAlbum, String producer) {
+        super(albumName, artist, releaseYear, totalTracks, pricePerAlbum);
+        this.producer = producer;
+    }
+}
