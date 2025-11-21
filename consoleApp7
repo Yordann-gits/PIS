@@ -1,0 +1,63 @@
+// Exception
+class OutOfStockException extends Exception {
+    public OutOfStockException(String message) {
+        super(message);
+    }
+}
+
+
+abstract class Book {
+    protected String title;
+    protected String author;
+    protected int releaseYear;
+    protected int totalCopies;
+    protected double pricePerCopy;
+
+    public Book(String title, String author, int releaseYear, int totalCopies, double pricePerCopy) {
+        this.title = title;
+        this.author = author;
+        this.releaseYear = releaseYear;
+        this.totalCopies = totalCopies;
+        this.pricePerCopy = pricePerCopy;
+    }
+
+    public abstract boolean sellBook(int num) throws OutOfStockException;
+}
+
+
+class FictionBook extends Book {
+    private String genre;
+
+    public FictionBook(String title, String author, int releaseYear, int totalCopies, double pricePerCopy, String genre) {
+        super(title, author, releaseYear, totalCopies, pricePerCopy);
+        this.genre = genre;
+    }
+
+    @Override
+    public boolean sellBook(int num) throws OutOfStockException {
+        if (totalCopies >= num) {
+            totalCopies -= num;
+            return true;
+        }
+        throw new OutOfStockException("Няма достатъчно копия!");
+    }
+}
+
+
+class NonFictionBook extends Book {
+    private String subject;
+
+    public NonFictionBook(String title, String author, int releaseYear, int totalCopies, double pricePerCopy, String subject) {
+        super(title, author, releaseYear, totalCopies, pricePerCopy);
+        this.subject = subject;
+    }
+
+    @Override
+    public boolean sellBook(int num) throws OutOfStockException {
+        if (totalCopies >= num) {
+            totalCopies -= num;
+            return true;
+        }
+        throw new OutOfStockException("Няма достатъчно копия!");
+    }
+}
