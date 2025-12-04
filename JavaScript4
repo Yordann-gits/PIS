@@ -1,0 +1,11 @@
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+
+function censorWord(text, word) {
+  if (!word) return text;
+  const pattern = new RegExp('\\b' + escapeRegExp(word) + '\\b', 'g');
+  const stars = '*'.repeat(word.length);
+  return text.replace(pattern, stars);
+}
