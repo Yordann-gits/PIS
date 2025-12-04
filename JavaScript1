@@ -1,0 +1,16 @@
+
+function sumFirstLast(arr) {
+  if (!Array.isArray(arr) || arr.length === 0) return 0;
+  return arr[0] + arr[arr.length - 1];
+}
+
+function removeValuesFromThreeArrays(arr1, arr2, arr3) {
+  const toRemove = new Set([20, 22, 69]);
+  const filterFn = a => a.filter(x => !toRemove.has(x));
+  return [ filterFn(arr1), filterFn(arr2), filterFn(arr3) ];
+}
+
+console.log(sumFirstLast([20, 30, 40]));           
+console.log(sumFirstLast([10, 17, 22, 33, 40]));    
+console.log(sumFirstLast([11, 58, 69]));            
+
