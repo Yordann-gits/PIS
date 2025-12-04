@@ -1,0 +1,6 @@
+
+function takeAndReverse(n, arr) {
+  if (!Array.isArray(arr)) return [];
+  const taken = arr.slice(0, n);
+  return taken.reverse();
+}
