@@ -1,0 +1,25 @@
+const person = {
+  hair: "black",
+  eyes: "black",
+  skin: "fair",
+
+  eat() {
+    console.log("The person is eating.");
+  },
+  sleep() {
+    console.log("The person is sleeping.");
+  },
+  walk() {
+    console.log("The person is walking.");
+  },
+  play() {
+    console.log("The person is playing.");
+  },
+  study() {
+    console.log("The person is studying.");
+  }
+};
+
+// Пример за използване:
+console.log(person.hair);   // black
+person.study();             // The person is studying.
